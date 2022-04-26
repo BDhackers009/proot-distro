@@ -453,9 +453,13 @@ command_install() {
 		msg
 		msg "${CYAN}Now run '${GREEN}${distro_name}${CYAN}' to log in.${RST}"
 		msg
-	    echo "$PROGRAM_NAME login $distro_name --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp" > /data/data/com.termux/files/usr/bin/${distro_name} 
+		sed -i s/distro/${distro_name}/g $PREFIX/etc/prootdir/user.sh
+		sed -i s/distro/${distro_name}/g $PREFIX/etc/prootdir/distro
+		cp $PREFIX/etc/prootdir/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
+		cp $PREFIX/etc/prootdir/distro /data/data/com.termux/files/usr/bin/${distro_name}
+	#    echo "$PROGRAM_NAME login $distro_name --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp" > /data/data/com.termux/files/usr/bin/${distro_name} 
 		chmod +x /data/data/com.termux/files/usr/bin/${distro_name}
-		cp /data/data/com.termux/files/usr/etc/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
+	#	cp /data/data/com.termux/files/usr/etc/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
 		return 0
 	else
 		msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Cannot find '${distro_plugin_script}' which contains distro-specific install functions.${RST}"

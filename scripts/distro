@@ -1,0 +1,7 @@
+#!/bin/bash
+user=$1
+if [[ ! ${user} == "" ]]; then
+	proot-distro login distro --user ${user} --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+else
+	proot-distro login distro --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+fi
