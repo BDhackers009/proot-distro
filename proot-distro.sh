@@ -454,7 +454,7 @@ command_install() {
 		msg "${CYAN}Now run '${GREEN}${distro_name}${CYAN}' to log in.${RST}"
 		msg
 		sed -i s/distro/${distro_name}/g $PREFIX/etc/prootdir/user.sh
-		sed -i s/distro/${distro_name}/g $PREFIX/etc/prootdir/distro
+		sed -i s/dname/${distro_name}/g $PREFIX/etc/prootdir/distro
 		cp $PREFIX/etc/prootdir/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
 		cp $PREFIX/etc/prootdir/distro /data/data/com.termux/files/usr/bin/${distro_name}
 	#    echo "$PROGRAM_NAME login $distro_name --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp" > /data/data/com.termux/files/usr/bin/${distro_name} 

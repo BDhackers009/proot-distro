@@ -18,8 +18,8 @@ for script in ./distro-plugins/*.sh*; do
 	install -Dm600 -t "$TERMUX_PREFIX"/etc/proot-distro/ "$script"
 done
 #mv user.sh "$TERMUX_PREFIX"/etc
-mkdir -p ${TERMUX_PREFIX}/prootdir
-cp ./scripts/user.sh ${TERMUX_PREFIX}/prootdir
-cp ./scripts/distro ${TERMUX_PREFIX}/prootdir
+mkdir -p $PREFIX/etc/prootdir
+cp ./scripts/user.sh $PREFIX/etc/prootdir
+cp ./scripts/distro $PREFIX/etc/prootdir
 echo "Installing $TERMUX_PREFIX/share/doc/proot-distro/README.md"
 install -Dm600 README.md "$TERMUX_PREFIX"/share/doc/proot-distro/README.md
