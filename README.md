@@ -18,22 +18,9 @@ before run and refuses to work if detected user id `0` (root).
 
 ## Supported distributions
 
-PRoot Distro provides support only one version of distribution types, i.e. one
-of stable, LTS or rolling-release. Support of versioned distributions ended
-with branch 2.x. If you need a custom version, you will need to add it on your
-own. See [Adding distribution](#adding-distribution).
-
 Here are the supported distributions:
 
 * [Kali Linux (nethunter)](https://github.com/bdhackers009/nethunter-termux)
-* Alpine Linux (edge)
-* Arch Linux / Arch Linux 32 / Arch Linux ARM
-* Debian (stable)
-* Fedora 35
-* Manjaro AArch64
-* OpenSUSE (Tumbleweed)
-* Ubuntu (21.10)
-* Void Linux
 
 All systems come in a bare-minumum variant, typically consisting of package
 manager, shell, coreutils, util-linux and few more. Extended functionality
@@ -44,16 +31,7 @@ manually.
 
 There is a number of issues that are not resolved.
 
-1. OpenSUSE installation: `zypper dup` will attempt to remove itself and
-   other essential packages.
-
-   It is unknown why this issue happens and how to fix it. This is not
-   problem of supplied rootfs. Under chroot it behaves normally. But when
-   it comes to (rootless only?) proot, the issue appears.
-
-   Even though distribution is completely broken, it won't be removed.
-
-2. Android 12: `WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"`
+ 1. Android 12: `WARNING: linker: Warning: failed to find generated linker configuration from "/linkerconfig/ld.config.txt"`
 
    This warning may appear during installation of selected distribution.
    Ignore it as it seem to be harmless.
@@ -93,7 +71,7 @@ is available) and `<arguments>` is a list of options specific to given command.
 
 Example of installing the distribution:
 ```
-proot-distro install debian
+proot-distro install kali
 ```
 
 Known distributions are defined through plug-in scripts, which define URLs
@@ -126,8 +104,8 @@ not compressed giving user freedom for further processing.
 
 Usage example:
 ```
-proot-distro backup debian | xz | ssh example.com 'cat > /backups/pd-debian-backup.tar.xz'
-proot-distro backup --output backup.tar.gz debian
+proot-distro backup kali | xz | ssh example.com 'cat > /backups/kali-backup.tar.xz'
+proot-distro backup --output kali.tar.gz kali
 ```
 
 *This command is generic. All additional processing like encryption should be
@@ -142,7 +120,7 @@ plug-in of chosen distribution.
 
 Usage example:
 ```
-proot-distro install alpine
+proot-distro install kali
 ```
 
 By default the installed distribution will have same alias as specified on
@@ -152,8 +130,8 @@ option `--override-alias` which will create a copy of distribution plug-in.
 
 Usage example:
 ```
-proot-distro install --override-alias alpine-test alpine
-proot-distro login alpine-test
+proot-distro install --override-alias kali-test  kali
+proot-distro login kali-test
 ```
 
 Copied plug-in has following name format `<name>.override.sh` and is stored
@@ -172,17 +150,17 @@ Command: `login`
 
 Execute a shell within the given distribution. Example:
 ```
-proot-distro login debian
+proot-distro login kali
 ```
 
 Execute a shell as specified user in the given distribution:
 ```
-proot-distro login --user admin debian
+proot-distro login --user admin kali
 ```
 
 You can run a custom command as well:
 ```
-proot-distro login debian -- /usr/local/bin/mycommand --sample-option1
+proot-distro login kali -- /usr/local/bin/mycommand --sample-option1
 ```
 
 Argument `--` acts as terminator of `proot-distro login` options processing.
@@ -262,7 +240,7 @@ as it does not ask for confirmation. Deleted data is irrecoverably lost.
 
 Usage example:
 ```
-proot-distro remove debian
+proot-distro remove kali
 ```
 
 ### Reinstall distribution
@@ -276,7 +254,7 @@ proot-distro remove <dist> && proot-distro install <dist>
 
 Usage example:
 ```
-proot-distro reset debian
+proot-distro reset kali
 ```
 
 Same as with command `remove`, deleted data is lost irrecoverably. Be careful.
@@ -295,8 +273,8 @@ must be always uncompressed before being supplied to `proot-distro`.
 
 Usage example:
 ```
-ssh example.com 'cat /backups/pd-debian-backup.tar.xz' | xz -d | proot-distro restore
-proot-distro restore ./pd-debian-backup.tar.xz
+ssh example.com 'cat /backups/kali-backup.tar.xz' | xz -d | proot-distro restore
+proot-distro restore ./kali-backup.tar.xz
 ```
 
 ### Clear downloads cache
@@ -310,9 +288,9 @@ This will remove all cached root file system archives.
 Distribution is defined through the plug-in script that contains variables
 with metadata. A minimal one would look like this:
 ```.bash
-DISTRO_NAME="Debian"
-TARBALL_URL['aarch64']="https://github.com/termux/proot-distro/releases/download/v1.10.1/debian-aarch64-pd-v1.10.1.tar.xz"
-TARBALL_SHA256['aarch64']="f34802fbb300b4d088a638c638683fd2bfc1c03f4b40fa4cb7d2113231401a21"
+DISTRO_NAME="Kali Linux (nethunter)"
+TARBALL_URL['aarch64']="https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-nano.tar.xz"
+TARBALL_SHA256['aarch64']="2aa9e8b1d7561768abd1e2ce8104f1ccc60cbf3072b58e976edf219114808546"
 ```
 
 Script is stored in directory `$PREFIX/etc/proot-distro` and should be named
