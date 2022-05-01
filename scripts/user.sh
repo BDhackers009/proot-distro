@@ -23,6 +23,7 @@ echo
 sleep .5
 useradd -m -s $(which zsh)  ${username}
 echo "${username}:${pass}" | chpasswd
+touch /home/${username}/.hushlogin
 
 echo "${username} ALL=(ALL:ALL) ALL" >> /etc/sudoers
 
