@@ -5,7 +5,7 @@ TARBALL_URL['arm']="https://kali.download/nethunter-images/current/rootfs/kalifs
 TARBALL_SHA256['arm']="9ea566808762960b4f24982f7c0b41da49b6b86417d83fa6573f74feb97e0f0a"
 distro_setup() {
 	run_proot_cmd userdel -rf kali
-	run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then touch /root/.hushlogin && source /root/.zshrc; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.zshrc
+	run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then clear && touch /root/.hushlogin && source /root/.zshrc && clear; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.zshrc
 
 }
 
