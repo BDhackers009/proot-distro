@@ -455,6 +455,7 @@ command_install() {
 		msg
 		sed -i "s/distro/${distro_name}/g" $PREFIX/etc/prootdir/user.sh
 		sed -i "s/dname/${distro_name}/g" $PREFIX/etc/prootdir/distro
+		sleep .5
 		cp $PREFIX/etc/prootdir/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
 		cp $PREFIX/etc/prootdir/distro /data/data/com.termux/files/usr/bin/${distro_name}
 		#mv /data/data/com.termux/files/usr/etc/prootdir/${distro_name} /data/data/com.termux/files/usr/bin/${distro_name}
