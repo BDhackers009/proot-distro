@@ -1,11 +1,7 @@
 #!/bin/bash
 user=$1
 upd="--update"
-if [[ ! ${user} == "" ]]; then
-	proot-distro login dname --user ${user} --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
-elif [[ ${user} == "" ]]; then
-	proot-distro login dname --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
-elif [[ ${user} == ${upd} ]]; then
+if [[ ${user} == ${upd} ]]; then
 	echo
 	echo "Your ${dname} is going to be wiped and reseted"
 	echo
@@ -30,4 +26,10 @@ elif [[ ${user} == ${upd} ]]; then
 			echo "Error updating ${dname}. Please re run this proccess"
 		fi
 	fi
+fi
+if [[ ! ${user} == "" ]]; then
+	proot-distro login dname --user ${user} --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+elif [[ ${user} == "" ]]; then
+	proot-distro login dname --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+
 fi
