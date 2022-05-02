@@ -2,6 +2,31 @@
 user=$1
 if [[ ! ${user} == "" ]]; then
 	proot-distro login dname --user ${user} --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
-else
+elif [[ ${user} == "" ]]; then
 	proot-distro login dname --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+elif [[ ${user} == "update" ]]; then
+	echo
+	echo "Your ${dname} is going to be wiped and reseted"
+	echo
+	read -p "Do you want to continue [Y/n] " yn
+	echo
+	if [[ ${yn} == "Y" && ${yn} == "y" ]]; then
+		rm -rf $HOME/proot-distro && git clone https://github.com/BDhaCkers009/proot-distro $HOME/proot-distro && cd $HOME/proot-distro && bash install.sh && proot-distro reset ${dname} && rm -rf $HOME/proot-distro && clear
+		if [[ $? == "0" ]]; then
+			echo "Your ${dname} is updated and wiped..successfully"
+		else
+			echo "Error updating ${dname}. Please re run this proccess"
+		fi
+	elif [[ ${yn} == "N" && ${yn} == "n" ]]; then
+		echo
+		echo "Abort updating ${dname}"
+		exit 
+	else 
+	rm -rf $HOME/proot-distro && git clone https://github.com/BDhaCkers009/proot-distro $HOME/proot-distro && cd $HOME/proot-distro && bash install.sh && proot-distro reset ${dname} && rm -rf $HOME/proot-distro && clear
+		if [[ $? == "0" ]]; then
+			echo "Your ${dname} is updated and wiped..successfully"
+		else
+			echo "Error updating ${dname}. Please re run this proccess"
+		fi
+	fi
 fi
