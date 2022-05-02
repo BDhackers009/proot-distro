@@ -245,7 +245,7 @@ command_install() {
 		msg
 		msg "${BRED}Error: distribution '${YELLOW}${distro_name}${BRED}' is already installed.${RST}"
 		msg
-		msg "${CYAN}Log in:     ${GREEN}${distro_name}${RST}"
+		msg "${CYAN}Log in:     ${GREEN}${PROGRAM_NAME} login ${distro_name}${RST}"
 		msg "${CYAN}Reinstall:  ${GREEN}${PROGRAM_NAME} reset ${distro_name}${RST}"
 		msg "${CYAN}Uninstall:  ${GREEN}${PROGRAM_NAME} remove ${distro_name}${RST}"
 		msg
@@ -451,17 +451,8 @@ command_install() {
 
 		msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Installation finished.${RST}"
 		msg
-		msg "${CYAN}Now run '${GREEN}${distro_name}${CYAN}' to log in.${RST}"
+		msg "${CYAN}Now run '${GREEN}$PROGRAM_NAME login $distro_name${CYAN}' to log in.${RST}"
 		msg
-		sed -i "s/distro/${distro_name}/g" $PREFIX/etc/prootdir/user.sh
-		sed -i "s/dname/${distro_name}/g" $PREFIX/etc/prootdir/distro
-		sleep .5
-		cp $PREFIX/etc/prootdir/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
-		cp $PREFIX/etc/prootdir/distro /data/data/com.termux/files/usr/bin/${distro_name}
-		#mv /data/data/com.termux/files/usr/etc/prootdir/${distro_name} /data/data/com.termux/files/usr/bin/${distro_name}
-	#    echo "$PROGRAM_NAME login $distro_name --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp" > /data/data/com.termux/files/usr/bin/${distro_name} 
-		chmod +x /data/data/com.termux/files/usr/bin/${distro_name}
-	#	cp /data/data/com.termux/files/usr/etc/user.sh /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/${distro_name}/root/user.sh
 		return 0
 	else
 		msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Cannot find '${distro_plugin_script}' which contains distro-specific install functions.${RST}"
