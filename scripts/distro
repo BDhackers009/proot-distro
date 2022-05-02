@@ -8,12 +8,29 @@ if [[ ${user} == ${upd} ]]; then
 	read -p "Do you want to continue [Y/n] " yn
 	echo
 	if [[ ${yn} == "Y" && ${yn} == "y" ]]; then
-		rm -rf $HOME/proot-distro && git clone https://github.com/BDhaCkers009/proot-distro $HOME/proot-distro && cd $HOME/proot-distro && bash install.sh && proot-distro reset ${dname} && rm -rf $HOME/proot-distro && clear
-		if [[ $? == "0" ]]; then
-			echo "Your ${dname} is updated and wiped..successfully"
-		else
-			echo "Error updating ${dname}. Please re run this proccess"
+		if [ -f $HOME/proot-distro]; then 
+			cd $HOME
+			rm -rf $HOME/proot-distro
+			git clone https://github.com/BDhaCkers009/proot-distro $HOME/proot-distro
+			cd $HOME/proot-distro 
+			bash install.sh
+			proot-distro reset ${dname} 
+			rm -rf $HOME/proot-distro
+			clear
+		elif [ ! -f $HOME/proot-distro ]; then
+			cd $HOME
+			git clone https://github.com/BDhaCkers009/proot-distro $HOME/proot-distro
+			cd $HOME/proot-distro 
+			bash install.sh
+			proot-distro reset ${dname} 
+			rm -rf $HOME/proot-distro
+			clear
 		fi
+			if [[ $? == "0" ]]; then
+				echo "Your ${dname} is updated and wiped..successfully"
+			else
+				echo "Error updating ${dname}. Please re run this proccess"
+			fi
 	elif [[ ${yn} == "N" && ${yn} == "n" ]]; then
 		echo
 		echo "Abort updating ${dname}"
