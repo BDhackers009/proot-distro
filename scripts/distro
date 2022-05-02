@@ -29,7 +29,7 @@ if [[ ${user} == ${upd} ]]; then
 			if [[ $? == "0" ]]; then
 				echo "Your dname is updated and wiped..successfully"
 				echo "you can run your dname distro using command :- dname"
-				exit 
+				exit
 			else
 				echo "Error updating dname. Please re run this proccess"
 				exit
