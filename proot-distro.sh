@@ -132,6 +132,15 @@ is_distro_installed() {
 #  10. Add missing Android specific UIDs/GIDs to user database.
 #  11. Execute optional setup hook (distro_setup) if present.
 #
+prosetup() {
+	PREFIX="/data/data/com.termux/files/usr"
+	sed -i "s/dname/${distro_name}/g" ${PREFIX}/etc/prootdir/user.sh
+	sed -i "s/dname/${distro_name}/g" ${PREFIX}/etc/prootdir/distro
+	cp ${PREFIX}/etc/prootdir/user.sh ${INSTALLED_ROOTFS_DIR}/${distro_name}/root/user.sh
+	cp ${PREFIX}/etc/prootdir/distro ${PREFIX}/etc/prootdir/${distro_name}
+	mv ${PREFIX}/bin/${distro_name}
+	chmod +x ${PREFIX}/bin/${distro_name}
+}
 command_install() {
 	local distro_name
 	local override_alias
@@ -245,7 +254,7 @@ command_install() {
 		msg
 		msg "${BRED}Error: distribution '${YELLOW}${distro_name}${BRED}' is already installed.${RST}"
 		msg
-		msg "${CYAN}Log in:     ${GREEN}${PROGRAM_NAME} login ${distro_name}${RST}"
+		msg "${CYAN}Log in:   ${distro_name}${RST}"
 		msg "${CYAN}Reinstall:  ${GREEN}${PROGRAM_NAME} reset ${distro_name}${RST}"
 		msg "${CYAN}Uninstall:  ${GREEN}${PROGRAM_NAME} remove ${distro_name}${RST}"
 		msg
@@ -450,8 +459,9 @@ command_install() {
 		fi
 
 		msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Installation finished.${RST}"
+		prosetup
 		msg
-		msg "${CYAN}Now run '${GREEN}$PROGRAM_NAME login $distro_name${CYAN}' to log in.${RST}"
+		msg "${CYAN}Now run '$distro_name${CYAN}' to log in.${RST}"
 		msg
 		return 0
 	else

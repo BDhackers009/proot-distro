@@ -15,7 +15,8 @@ echo "Username: ${username}"
 echo
 echo "Password:  ${pass}"
 echo
-
+echo "From the next time you can log in to your user using :- dname ${username}"
+echo "If you want to create another user then run:- sudo bash /etc/user.sh"
 useradd -m -s $(which zsh)  ${username}
 echo "${username}:${pass}" | chpasswd
 
