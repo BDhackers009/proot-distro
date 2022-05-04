@@ -6,7 +6,7 @@ TARBALL_SHA256['arm']="9ea566808762960b4f24982f7c0b41da49b6b86417d83fa6573f74feb
 distro_setup() {
 	run_proot_cmd userdel -rf kali
 	run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then clear && touch /root/.hushlogin && source /root/.zshrc && clear; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.zshrc
-	run_proot_cmd sed -i "s/http.kali.org/kali.download" /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
-	run_proot_cmd sed -i "s/http/https/g" /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
+	run_proot_cmd echo "https://kali.download/kali kali-rolling main contrib  non-free" /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
+	#run_proot_cmd sed -i "s/http/https/g" /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
 }
 
