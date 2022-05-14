@@ -7,6 +7,6 @@ distro_setup() {
 	run_proot_cmd userdel -rf kali
 	run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then clear && touch /root/.hushlogin && source /root/.zshrc && clear; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.zshrc
 	run_proot_cmd echo "deb https://kali.download/kali kali-rolling main contrib  non-free" > /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
-	#run_proot_cmd sed -i "s/http/https/g" /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
+	run_proot_cmd sed -i "s/8192/819/1" /usr/sbin/apache2ctl
 }
 
