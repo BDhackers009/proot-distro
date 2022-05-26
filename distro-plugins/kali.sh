@@ -1,8 +1,8 @@
 DISTRO_NAME="Kali Linux (nethunter)"
 TARBALL_URL['aarch64']="https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-nano.tar.xz"
-TARBALL_SHA256['aarch64']="2aa9e8b1d7561768abd1e2ce8104f1ccc60cbf3072b58e976edf219114808546"
+TARBALL_SHA256['aarch64']="be846f12da06c59da520860dc9da18ecacffca19c4723ffa4e148fa8ba3918c7"
 TARBALL_URL['arm']="https://kali.download/nethunter-images/current/rootfs/kalifs-armhf-nano.tar.xz"
-TARBALL_SHA256['arm']="9ea566808762960b4f24982f7c0b41da49b6b86417d83fa6573f74feb97e0f0a"
+TARBALL_SHA256['arm']="f49594d1c7213c0aa44e41a5aa7355416dc651819c480b016e9ea6c9353ed94c"
 distro_setup() {
 	run_proot_cmd userdel -rf kali
 	run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then clear && touch /root/.hushlogin && source /root/.zshrc && clear; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.zshrc
