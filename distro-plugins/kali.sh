@@ -9,7 +9,7 @@ TARBALL_SHA256["i686"]="62b3da1bfe9e36249d4ada485ec84ed3e1b7fe9b86deb0bb257622a6
 TARBALL_URL["i686"]="https://github.com/BDhackers009/nethunter-termux/releases/download/v2022.8-nh/kalifs-i386-minimal.tar.xz"
 distro_setup() {
 	run_proot_cmd userdel -rf kali
-	run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then clear && touch /root/.hushlogin && source /root/.zshrc && clear; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.zshrc
+	run_proot_cmd echo ".hushlogin" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/
 	run_proot_cmd echo "deb https://kali.download/kali kali-rolling main contrib  non-free" > /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/apt/sources.list
 	run_proot_cmd sed -i "s/8192/819/1" /usr/sbin/apache2ctl
 }
