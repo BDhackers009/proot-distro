@@ -949,8 +949,8 @@ command_login() {
 	local no_link2symlink=false
 	local no_sysvipc=false
 	local no_kill_on_exit=false
-	local fix_low_ports=false
-	local make_host_tmp_shared=false
+	local fix_low_ports=true
+	local make_host_tmp_shared=true
 	local distro_name=""
 	local login_user="root"
 	local -a custom_fs_bindings
