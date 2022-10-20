@@ -19,7 +19,7 @@ echo "From the next time you can log in to your user using :- kali ${username}"
 echo
 echo "If you want to create another user then run:- sudo bash /etc/user.sh"
 echo
-useradd -m -s $(which zsh)  ${username}
+useradd -m -s $(which bash)  ${username}
 echo "${username}:${pass}" | chpasswd
 
 echo "${username} ALL=(ALL:ALL) ALL" >> /etc/sudoers
