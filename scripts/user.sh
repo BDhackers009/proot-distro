@@ -22,12 +22,13 @@ echo "Password:  ${pass}"
 echo
 sleep .5
 useradd -m -s /usr/bin/bash  ${username}
-cp /root/.bashrc ~/.bashrc
+#cp /root/.bashrc ~/.bashrc
 echo "${username}:${pass}" | chpasswd
 touch /home/${username}/.hushlogin
 
-echo "${username} ALL=(ALL:ALL) ALL" >> /etc/sudoers
+echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
 
+echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
 mv user.sh /etc
