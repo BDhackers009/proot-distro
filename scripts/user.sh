@@ -21,7 +21,7 @@ sleep .5
 echo "Password:  ${pass}"
 echo
 sleep .5
-useradd -m -s $(which zsh)  ${username}
+useradd -m -s /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/usr/bin/bash  ${username}
 echo "${username}:${pass}" | chpasswd
 touch /home/${username}/.hushlogin
 
