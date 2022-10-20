@@ -58,8 +58,8 @@ if [[ ${user} == ${upd} ]]; then
 	fi
 fi
 if [[ ! ${user} == "" ]]; then
-	proot-distro login dname --user ${user} --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+	proot-distro login dname --user ${user} --bind /dev/null:/proc/sys/kernel/cap_last_last
 elif [[ ${user} == "" ]]; then
-	proot-distro login dname --bind /dev/null:/proc/sys/kernel/cap_last_last --shared-tmp --fix-low-ports
+	proot-distro login dname --bind /dev/null:/proc/sys/kernel/cap_last_last 
 
 fi
