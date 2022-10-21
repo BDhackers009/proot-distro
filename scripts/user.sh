@@ -30,5 +30,5 @@ echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
 
-echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
+#echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
 mv user.sh /etc
