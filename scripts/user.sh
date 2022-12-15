@@ -57,7 +57,7 @@ else
   #echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
   mv user.sh /etc
 fi
-echo "From next time you can login to this user with:- distro ${username} "
+echo "From next time you can login to this user with:- kali ${username} "
 echo
 echo "If you want to create another user then run:- sudo  bash /etc/user.sh"
 echo
