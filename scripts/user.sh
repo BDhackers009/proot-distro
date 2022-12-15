@@ -11,12 +11,12 @@ while true; do
   echo "Password doesnt match.Try Again"
   echo ""
 done
-echo "From next time you can login to this user with:- distro ${username} "
+#echo "From next time you can login to this user with:- distro ${username} "
 echo
-echo "If you want to create another user then run:- sudo  bash /etc/user.sh"
-echo
-echo "Username: ${username}"
-echo
+#echo "If you want to create another user then run:- sudo  bash /etc/user.sh"
+#echo
+#echo "Username: ${username}"
+#echo
 sleep .5
 echo "Password:  ${pass}"
 echo
@@ -25,7 +25,7 @@ echo
 echo '1. Bash (default)'
 echo '2. Zsh'
 echo
-read -p 'Choose Option: ' ch-sh
+read -p 'Choose Option: ' ch_sh
 if [[ ${ch-sh} == '1' ]];then
   sleep .5
   useradd -m -s /usr/bin/bash  ${username}
@@ -57,3 +57,9 @@ else
   #echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
   mv user.sh /etc
 fi
+echo "From next time you can login to this user with:- distro ${username} "
+echo
+echo "If you want to create another user then run:- sudo  bash /etc/user.sh"
+echo
+echo "Username: ${username}"
+echo
