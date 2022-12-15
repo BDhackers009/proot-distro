@@ -20,43 +20,43 @@ echo
 sleep .5
 echo "Password:  ${pass}"
 echo
-echo "Choose Shell" ch-sh
-echo
-echo '1. Bash (default)'
-echo '2. Zsh'
-echo
-read -p 'Choose Option: ' ch_sh
-if [[ ${ch-sh} == '1' ]];then
-  sleep .5
-  useradd -m -s /usr/bin/bash  ${username}
+#echo "Choose Shell" ch-sh
+#echo
+#echo '1. Bash (default)'
+#echo '2. Zsh'
+#echo
+#read -p 'Choose Option: ' ch_sh
+#if [[ ${ch-sh} == '1' ]];then
+sleep .5
+useradd -m -s /usr/bin/bash  ${username}
   #cp /root/.bashrc ~/.bashrc
-  echo "${username}:${pass}" | chpasswd
-  touch /home/${username}/.hushlogin
-  echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
-  chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+echo "${username}:${pass}" | chpasswd
+touch /home/${username}/.hushlogin
+echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+#echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
+mv user.sh /etc
+#elif [[ ${ch-sh} == '2' ]];then
+#sleep .5
+#useradd -m -s /usr/bin/zsh  ${username}
+##cp /root/.bashrc ~/.bashrc
+#echo "${username}:${pass}" | chpasswd
+#touch /home/${username}/.hushlogin
+#echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+#chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
   #echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
-  mv user.sh /etc
-elif [[ ${ch-sh} == '2' ]];then
-  sleep .5
-  useradd -m -s /usr/bin/zsh  ${username}
+  #mv user.sh /etc
+#else 
+ # sleep .5
+  #useradd -m -s /usr/bin/bash  ${username}
   #cp /root/.bashrc ~/.bashrc
-  echo "${username}:${pass}" | chpasswd
-  touch /home/${username}/.hushlogin
-  echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
-  chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
-  #echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
-  mv user.sh /etc
-else 
-  sleep .5
-  useradd -m -s /usr/bin/bash  ${username}
-  #cp /root/.bashrc ~/.bashrc
-  echo "${username}:${pass}" | chpasswd
-  touch /home/${username}/.hushlogin
-  echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
-  chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
-  #echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
-  mv user.sh /etc
-fi
+  #echo "${username}:${pass}" | chpasswd
+  #touch /home/${username}/.hushlogin
+  #echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
+  #chown root:root /usr/bin/sudo && chmod 4755 /usr/bin/sudo
+  ##echo "if [[ $(cat /etc/sudoers | grep ${username}) = '' ]];then echo '${username} ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /home/$username/.bashrc
+  #mv user.sh /etc
+#fi
 echo "From next time you can login to this user with:- kali ${username} "
 echo
 echo "If you want to create another user then run:- sudo  bash /etc/user.sh"
