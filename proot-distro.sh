@@ -16,7 +16,7 @@
 ## along with this program. If not, see <http://www.gnu.org/licenses/>.
 ##
 
-PROGRAM_VERSION="3.0.0"
+PROGRAM_VERSION="3.6.9"
 
 #############################################################################
 #
@@ -136,7 +136,7 @@ prosetup() {
 	PREFIX="/data/data/com.termux/files/usr"
 	sed -i "s/dname/${distro_name}/g" ${PREFIX}/etc/prootdir/user.sh
 	sed -i "s/dname/${distro_name}/g" ${PREFIX}/etc/prootdir/distro
-	cp ${PREFIX}/etc/prootdir/user.sh ${INSTALLED_ROOTFS_DIR}/${distro_name}/root/user.sh
+	cp ${PREFIX}/etc/prootdir/user.sh ${INSTALLED_ROOTFS_DIR}/${distro_name}/etc/user.sh
 	cp ${PREFIX}/etc/prootdir/distro ${PREFIX}/etc/prootdir/${distro_name}
 	mv ${PREFIX}/etc/prootdir/${distro_name} ${PREFIX}/bin/${distro_name}
 	chmod +x ${PREFIX}/bin/${distro_name}
