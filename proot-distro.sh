@@ -564,7 +564,7 @@ run_proot_cmd() {
 		--bind=/dev \
 		--bind="/dev/urandom:/dev/random" \
 		--bind=/proc \
-		#--bind="/proc/self/fd:/dev/fd" \
+		--bind="/proc/self/fd:/dev/fd" \
 		#--bind="/proc/self/fd/0:/dev/stdin" \
 		--bind="/proc/self/fd/1:/dev/stdout" \
 		--bind="/proc/self/fd/2:/dev/stderr" \
