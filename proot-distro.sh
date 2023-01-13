@@ -462,7 +462,7 @@ command_install() {
 		msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Installation finished.${RST}"
 		prosetup
 		msg
-		msg "${CYAN}Now run '$distro_name${CYAN}' to log in.${RST}"
+		msg "${CYAN}Now run ${RST}' ${GREEN}$distro_name ${RST}'${CYAN} to log in.${RST}"
 		msg
 		return 0
 	else
