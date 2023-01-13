@@ -332,7 +332,7 @@ command_install() {
 			# fail for some reason.
 			msg
 			rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
-			if ! wget -nc -P  -o "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp" -nv "${TARBALL_URL["$DISTRO_ARCH"]}"; then
+			if ! aria2c --console-log-level=warn --no-conf -x6 -s6 -k1M -d "${DOWNLOAD_CACHE_DIR}/ -o ${tarball_name}.tmp" "${TARBALL_URL["$DISTRO_ARCH"]}"; then
 				msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Download failure, please check your network connection.${RST}"
 				rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
 				return 1
@@ -1878,7 +1878,7 @@ show_version() {
 # This will be executed when signal HUP/INT/TERM is received.
 trap 'echo -e "\\r${BLUE}[${RED}!${BLUE}] ${CYAN}Exiting immediately as requested.${RST}"; exit 1;' HUP INT TERM
 
-for i in awk bzip2 wget find gzip proot sed tar xz; do
+for i in awk bzip2 aria2c find gzip proot sed tar xz; do
 	if [ -z "$(command -v "$i")" ]; then
 		msg
 		msg "${BRED}Utility '${i}' is not installed. Cannot continue.${RST}"
