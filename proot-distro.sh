@@ -34,7 +34,7 @@ DISTRO_PLUGINS_DIR="@TERMUX_PREFIX@/etc/proot-distro"
 RUNTIME_DIR="@TERMUX_PREFIX@/var/lib/proot-distro"
 
 # Where rootfs tarballs are downloaded.
-DOWNLOAD_CACHE_DIR="${RUNTIME_DIR}/dlcache/"
+DOWNLOAD_CACHE_DIR="${RUNTIME_DIR}/dlcache"
 
 # Where extracted rootfs are stored.
 INSTALLED_ROOTFS_DIR="${RUNTIME_DIR}/installed-rootfs"
@@ -332,7 +332,7 @@ command_install() {
 			# fail for some reason.
 			msg
 			rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
-			if ! aria2c --console-log-level=notice --no-conf -x6 -s6 -k1M -d ${DOWNLOAD_CACHE_DIR} -o "${tarball_name}.tmp" "${TARBALL_URL["$DISTRO_ARCH"]}"; then
+			if ! wget -q --show-progress -nc -P ${DOWNLOAD_CACHE_DIR} -O "${tarball_name}.tmp" --limit-rate=1000k "${TARBALL_URL["$DISTRO_ARCH"]}"; then
 				msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Download failure, please check your network connection.${RST}"
 				rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
 				return 1
@@ -1878,7 +1878,7 @@ show_version() {
 # This will be executed when signal HUP/INT/TERM is received.
 trap 'echo -e "\\r${BLUE}[${RED}!${BLUE}] ${CYAN}Exiting immediately as requested.${RST}"; exit 1;' HUP INT TERM
 
-for i in awk bzip2 aria2c find gzip proot sed tar xz; do
+for i in awk bzip2 wget find gzip proot sed tar xz; do
 	if [ -z "$(command -v "$i")" ]; then
 		msg
 		msg "${BRED}Utility '${i}' is not installed. Cannot continue.${RST}"
