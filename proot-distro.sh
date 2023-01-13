@@ -564,8 +564,8 @@ run_proot_cmd() {
 		--bind=/dev \
 		--bind="/dev/urandom:/dev/random" \
 		--bind=/proc \
-		--bind="/proc/self/fd:/dev/fd" \
-		--bind="/proc/self/fd/0:/dev/stdin" \
+		#--bind="/proc/self/fd:/dev/fd" \
+		#--bind="/proc/self/fd/0:/dev/stdin" \
 		--bind="/proc/self/fd/1:/dev/stdout" \
 		--bind="/proc/self/fd/2:/dev/stderr" \
 		--bind=/sys \
@@ -1208,7 +1208,7 @@ command_login() {
 		set -- "--bind=/dev" "$@"
 		set -- "--bind=/dev/urandom:/dev/random" "$@"
 		set -- "--bind=/proc" "$@"
-		#set -- "--bind=/proc/self/fd:/dev/fd" "$@"
+		set -- "--bind=/proc/self/fd:/dev/fd" "$@"
 		#set -- "--bind=/proc/self/fd/0:/dev/stdin" "$@"
 		set -- "--bind=/proc/self/fd/1:/dev/stdout" "$@"
 		set -- "--bind=/proc/self/fd/2:/dev/stderr" "$@"
