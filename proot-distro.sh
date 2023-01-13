@@ -318,6 +318,8 @@ command_install() {
 			msg "${BLUE}[${GREEN}*${BLUE}] ${CYAN}Creating directory '$DOWNLOAD_CACHE_DIR'...${RST}"
 			mkdir -p "$DOWNLOAD_CACHE_DIR"
 		fi
+		#curl --fail --retry 5 --retry-connrefused --retry-delay 5 --location \
+				#--output "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp" "${TARBALL_URL["$DISTRO_ARCH"]}"
 
 		local tarball_name
 		tarball_name=$(basename "${TARBALL_URL["$DISTRO_ARCH"]}")
@@ -330,8 +332,7 @@ command_install() {
 			# fail for some reason.
 			msg
 			rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
-			if ! curl --fail --retry 5 --retry-connrefused --retry-delay 5 --location \
-				--output "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp" "${TARBALL_URL["$DISTRO_ARCH"]}"; then
+			if ! aria2c --console-log-level=error --no-conf -x6 -s6 -k1M -o "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp" "${TARBALL_URL["$DISTRO_ARCH"]}"; then
 				msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Download failure, please check your network connection.${RST}"
 				rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
 				return 1
@@ -1207,7 +1208,7 @@ command_login() {
 		set -- "--bind=/dev" "$@"
 		set -- "--bind=/dev/urandom:/dev/random" "$@"
 		set -- "--bind=/proc" "$@"
-		set -- "--bind=/proc/self/fd:/dev/fd" "$@"
+		#set -- "--bind=/proc/self/fd:/dev/fd" "$@"
 		#set -- "--bind=/proc/self/fd/0:/dev/stdin" "$@"
 		set -- "--bind=/proc/self/fd/1:/dev/stdout" "$@"
 		set -- "--bind=/proc/self/fd/2:/dev/stderr" "$@"
@@ -1878,7 +1879,7 @@ show_version() {
 # This will be executed when signal HUP/INT/TERM is received.
 trap 'echo -e "\\r${BLUE}[${RED}!${BLUE}] ${CYAN}Exiting immediately as requested.${RST}"; exit 1;' HUP INT TERM
 
-for i in awk bzip2 curl find gzip proot sed tar xz; do
+for i in awk bzip2 aria2c find gzip proot sed tar xz; do
 	if [ -z "$(command -v "$i")" ]; then
 		msg
 		msg "${BRED}Utility '${i}' is not installed. Cannot continue.${RST}"
