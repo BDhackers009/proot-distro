@@ -332,7 +332,7 @@ command_install() {
 			# fail for some reason.
 			msg
 			rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
-			if ! wget -q --show-progress -nc -P ${DOWNLOAD_CACHE_DIR} -O "${tarball_name}.tmp" --limit-rate=1000k "${TARBALL_URL["$DISTRO_ARCH"]}"; then
+			if ! wget -nc -P  -O "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp" -nv "${TARBALL_URL["$DISTRO_ARCH"]}"; then
 				msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Download failure, please check your network connection.${RST}"
 				rm -f "${DOWNLOAD_CACHE_DIR}/${tarball_name}.tmp"
 				return 1
