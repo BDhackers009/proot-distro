@@ -17,9 +17,7 @@ echo
 #echo
 #echo "Username: ${username}"
 #echo
-sleep .5
-echo "Password:  ${pass}"
-echo
+#sleep .5
 #echo "Choose Shell" ch-sh
 #echo
 #echo '1. Bash (default)'
@@ -59,7 +57,10 @@ mv user.sh /etc
 #fi
 echo "From next time you can login to this user with:- kali ${username} "
 echo
+echo "Your Username: ${username}"
+echo
+echo "Your Password:  ${pass}"
+echo
 echo "If you want to create another user then run:- sudo  bash /etc/user.sh"
 echo
-echo "Username: ${username}"
-echo
+echo "Enjoy Hunting! "
