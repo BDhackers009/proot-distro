@@ -1902,7 +1902,7 @@ show_version() {
 # 1. Check for dependencies. Assume that package 'coreutils' is always
 #    available.
 # 2. Check all available distribution plug-ins.
-# 3. Handle the requested commands or show help when '-h/--help/help' were
+# 3. Handle the requested commands or show help when '-h/--help/help' wer
 #    given. Further command line processing is offloaded to requested command.
 #
 
