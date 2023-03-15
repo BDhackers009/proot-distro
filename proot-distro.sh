@@ -474,6 +474,7 @@ command_install() {
 		msg "${BLUE}[${RED}!${BLUE}] ${CYAN}Cannot find '${distro_plugin_script}' which contains distro-specific install functions.${RST}"
 		return 1
 	fi
+fi
 }
 
 # Special function for executing a command in rootfs.
