@@ -8,7 +8,7 @@ TARBALL_URL["x86_64"]="https://pro.bandor69.workers.dev/6:/kalifs-amd64-minimal.
 TARBALL_SHA256["i686"]="e83cd8f57d6128efd64e88b191a1653ff315fffd78c05d536d2b6f63b2e6d49d"
 TARBALL_URL["i686"]="https://pro.bandor69.workers.dev/6:/kalifs-i386-minimal.tar.xz"
 distro_setup() {
-	#run_proot_cmd chsh -s /usr/bin/bash
+	run_proot_cmd chsh -s /usr/bin/bash
 	run_proot_cmd echo "$(getprop persist.sys.timezone)" > /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/timezone
 	#run_proot_cmd echo "if [ $(cat /etc/sudoers | grep $USER) = '' ]; then echo '${USER}	ALL=(ALL:ALL) ALL' >> /etc/sudoers;fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/home/${USER}/.bashrc
 	#run_proot_cmd echo "if [ ! -f /root/.hushlogin ]; then clear && touch /root/.hushlogin && source /root/.bashrc && clear; fi" >> /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/root/.bashrc
