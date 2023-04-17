@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Get the current directory of the script
+
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 # Move the script to /etc/ if it's not already there
