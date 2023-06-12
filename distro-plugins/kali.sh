@@ -1,12 +1,12 @@
 DISTRO_NAME="Kali Linux (nethunter)"
-TARBALL_URL['aarch64']="https://pro.bandor69.workers.dev/6:/kalifs-arm64-nano.tar.xz"
-TARBALL_SHA256['aarch64']="d8eaf35d6ea0c7a851b79a1e98c850fa117a6c7ce9f703f20a503f7761cd8a3d"
-TARBALL_URL['arm']="https://pro.bandor69.workers.dev/6:/kalifs-armhf-nano.tar.xz"
-TARBALL_SHA256['arm']="a3b953c700ed4170be90dc055ed420b31c173623617fc66cf5e17f6a4ea02624"
-TARBALL_SHA256["x86_64"]="096290b7229ab81f1ac3b35324a7109dc19f1e2f5bf6aab1ff8254ebc95463ea"
-TARBALL_URL["x86_64"]="https://pro.bandor69.workers.dev/6:/kalifs-amd64-minimal.tar.xz"
-TARBALL_SHA256["i686"]="e83cd8f57d6128efd64e88b191a1653ff315fffd78c05d536d2b6f63b2e6d49d"
-TARBALL_URL["i686"]="https://pro.bandor69.workers.dev/6:/kalifs-i386-minimal.tar.xz"
+TARBALL_URL['aarch64']="https://kali.download/nethunter-images/current/rootfs/kalifs-arm64-nano.tar.xz"
+TARBALL_SHA256['aarch64']="04a12b79d4ac38b7c85ea3eb25a85bff07fb89505a889782a114a97a5de2a84b"
+TARBALL_URL['arm']="https://kali.download/nethunter-images/current/rootfs/kalifs-armhf-nano.tar.xz"
+TARBALL_SHA256['arm']="17bae20743c67017d83448bc82de7cedaeb354d1c75dbadf2357fe93cf769f84"
+TARBALL_SHA256["x86_64"]="b7cfeccdcbf7a2844245405ecc680432237d3b0da49ee35eab0f3ce9fab645a1"
+TARBALL_URL["x86_64"]="https://kali.download/nethunter-images/current/rootfs/kalifs-amd64-minimal.tar.xz"
+TARBALL_SHA256["i686"]="0dd4b95635b601b9516c29bee016363dd5f378f9abb104736f93f76c82c3d8b6"
+TARBALL_URL["i686"]="https://kali.download/nethunter-images/current/rootfs/kalifs-i386-minimal.tar.xz"
 distro_setup() {
 	run_proot_cmd chsh -s /usr/bin/bash
 	run_proot_cmd echo "$(getprop persist.sys.timezone)" > /data/data/com.termux/files/usr/var/lib/proot-distro/installed-rootfs/kali/etc/timezone
