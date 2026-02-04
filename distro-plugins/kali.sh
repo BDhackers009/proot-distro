@@ -1,11 +1,11 @@
 DISTRO_NAME="Kali Linux (nethunter)"
 TARBALL_URL['aarch64']="https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-nano-arm64.tar.xz"
-TARBALL_SHA256['aarch64']="26982979dbaae4afd79a9a70e5fe8fbb81186e111a11b343f951979d2634d5ae"
+TARBALL_SHA256['aarch64']="73134c64ca91a562fd2dc4be428633001c92d8d48be59ef4cbfaa73d358986a1"
 TARBALL_URL['arm']="https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-armhf-nano.tar.xz"
-TARBALL_SHA256['arm']="1aedc42b5a2d64064fc3916a973d15a176ed294b56d06c091da2247f11a5fb05"
-TARBALL_SHA256["x86_64"]="248952f9c2302b02a875258912d9d16839b20cb527fa0184af0623f62e75c875"
+TARBALL_SHA256['arm']="9157cc56a210da83df397878704539d95ec25209a23363e3dac9e579be9b4caa"
+TARBALL_SHA256["x86_64"]="98164335544a6416e008a6039b12aea4daa6f99741ce099e00267cb8f1989f37"
 TARBALL_URL["x86_64"]="https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-amd64-minimal.tar.xz"
-TARBALL_SHA256["i686"]="28291729a01d30a4bd02feb65c4365978a02e4752f936fb9dd26a1507652a429"
+TARBALL_SHA256["i686"]="ca30f258358c83152ff27ac138b65e5ece28dd6aa1170f0ba939f94d75fb9d06"
 TARBALL_URL["i686"]="https://kali.download/nethunter-images/current/rootfs/kali-nethunter-rootfs-i386-minimal.tar.xz"
 distro_setup() {
 	run_proot_cmd chsh -s /usr/bin/bash
