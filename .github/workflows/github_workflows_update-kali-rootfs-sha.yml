@@ -1,0 +1,74 @@
+name: Update Kali rootfs SHA256 sums
+
+on:
+  schedule:
+    - cron: "17 3 * * *" # daily at 03:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-kali-sha:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Fetch upstream SHA256SUMS and update kali.sh
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          SUMS_URL="https://kali.download/nethunter-images/current/rootfs/SHA256SUMS"
+          FILE="distro-plugins/kali.sh"
+
+          curl -fsSL "$SUMS_URL" -o /tmp/SHA256SUMS
+
+          get_sha() {
+            local filename="$1"
+            awk -v f="$filename" '$2==f {print $1; exit}' /tmp/SHA256SUMS
+          }
+
+          ARM64_FILE="kali-nethunter-rootfs-nano-arm64.tar.xz"
+          ARMHF_FILE="kali-nethunter-rootfs-armhf-nano.tar.xz"
+          AMD64_FILE="kali-nethunter-rootfs-amd64-minimal.tar.xz"
+          I386_FILE="kali-nethunter-rootfs-i386-minimal.tar.xz"
+
+          ARM64_SHA="$(get_sha "$ARM64_FILE")"
+          ARMHF_SHA="$(get_sha "$ARMHF_FILE")"
+          AMD64_SHA="$(get_sha "$AMD64_FILE")"
+          I386_SHA="$(get_sha "$I386_FILE")"
+
+          for v in ARM64_SHA ARMHF_SHA AMD64_SHA I386_SHA; do
+            if [[ -z "${!v}" ]]; then
+              echo "ERROR: Missing checksum for $v in upstream SHA256SUMS"
+              exit 1
+            fi
+          done
+
+          sed -i -E "s|^TARBALL_SHA256\\['aarch64'\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256['aarch64']=\"$ARM64_SHA\"|" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\['arm'\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256['arm']=\"$ARMHF_SHA\"|" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\[\"x86_64\"\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256[\"x86_64\"]=\"$AMD64_SHA\"|" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\[\"i686\"\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256[\"i686\"]=\"$I386_SHA\"|" "$FILE"
+
+      - name: Create pull request if changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          base: master
+          branch: chore/update-kali-rootfs-sha
+          delete-branch: true
+          title: "chore(kali): update nethunter rootfs SHA256 sums"
+          commit-message: "chore(kali): update nethunter rootfs SHA256 sums"
+          body: |
+            Automated update of Kali NetHunter rootfs SHA256 values in `distro-plugins/kali.sh`.
+
+            Source:
+            - https://kali.download/nethunter-images/current/rootfs/SHA256SUMS
+          labels: |
+            dependencies
+            automated pr
