@@ -35,9 +35,9 @@ jobs:
           }
 
           ARM64_FILE="kali-nethunter-rootfs-nano-arm64.tar.xz"
-          ARMHF_FILE="kali-nethunter-rootfs-armhf-nano.tar.xz"
-          AMD64_FILE="kali-nethunter-rootfs-amd64-minimal.tar.xz"
-          I386_FILE="kali-nethunter-rootfs-i386-minimal.tar.xz"
+          ARMHF_FILE="kali-nethunter-rootfs-nano-armhf.tar.xz"
+          AMD64_FILE="kali-nethunter-rootfs-minimal-amd64.tar.xz"
+          I386_FILE="kali-nethunter-rootfs-minimal-i386.tar.xz"
 
           ARM64_SHA="$(get_sha "$ARM64_FILE")"
           ARMHF_SHA="$(get_sha "$ARMHF_FILE")"
