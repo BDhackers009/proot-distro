@@ -51,15 +51,10 @@ jobs:
             fi
           done
 
-          sed -i -E "s|^TARBALL_SHA256\['aarch64'\][[:space:]]*=[[:space:]]*\"[a-f0-9]{64}\"|TARBALL_SHA256['aarch64']=\"$ARM64_SHA\"|" "$FILE"
-          sed -i -E "s|^TARBALL_SHA256\['arm'\][[:space:]]*=[[:space:]]*\"[a-f0-9]{64}\"|TARBALL_SHA256['arm']=\"$ARMHF_SHA\"|" "$FILE"
-          sed -i -E "s|^TARBALL_SHA256\[\"x86_64\"\][[:space:]]*=[[:space:]]*\"[a-f0-9]{64}\"|TARBALL_SHA256[\"x86_64\"]=\"$AMD64_SHA\"|" "$FILE"
-          sed -i -E "s|^TARBALL_SHA256\[\"i686\"\][[:space:]]*=[[:space:]]*\"[a-f0-9]{64}\"|TARBALL_SHA256[\"i686\"]=\"$I386_SHA\"|" "$FILE"
-
-          grep -q "TARBALL_SHA256\['aarch64'\]=\"$ARM64_SHA\"" "$FILE"
-          grep -q "TARBALL_SHA256\['arm'\]=\"$ARMHF_SHA\"" "$FILE"
-          grep -q "TARBALL_SHA256\[\"x86_64\"\]=\"$AMD64_SHA\"" "$FILE"
-          grep -q "TARBALL_SHA256\[\"i686\"\]=\"$I386_SHA\"" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\['aarch64'\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256['aarch64']=\"$ARM64_SHA\"|" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\['arm'\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256['arm']=\"$ARMHF_SHA\"|" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\[\"x86_64\"\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256[\"x86_64\"]=\"$AMD64_SHA\"|" "$FILE"
+          sed -i -E "s|^TARBALL_SHA256\\[\"i686\"\\]=\"[a-f0-9]{64}\"|TARBALL_SHA256[\"i686\"]=\"$I386_SHA\"|" "$FILE"
 
       - name: Create pull request if changed
         uses: peter-evans/create-pull-request@v6
